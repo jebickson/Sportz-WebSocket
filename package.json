@@ -1,0 +1,25 @@
+{
+  "name": "sportz-websocket",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jebickson/Sportz-WebSocket.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/jebickson/Sportz-WebSocket/issues"
+  },
+  "homepage": "https://github.com/jebickson/Sportz-WebSocket#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
