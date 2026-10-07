@@ -5,7 +5,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "node --watch src/index.js",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:studio": "drizzle-kit studio",
+    "demo": "node src/crud-demo.js"
   },
   "repository": {
     "type": "git",
@@ -20,6 +24,12 @@
   },
   "homepage": "https://github.com/jebickson/Sportz-WebSocket#readme",
   "dependencies": {
-    "express": "^5.2.1"
+    "dotenv": "^18.0.6",
+    "drizzle-orm": "^0.45.3",
+    "express": "^5.2.1",
+    "pg": "^8.23.1"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.31.11"
   }
 }
