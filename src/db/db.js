@@ -11,3 +11,4 @@ export const pool = new pg.Pool({
 });
 
 export const db = drizzle(pool);
+//jebickson friend i changed here
