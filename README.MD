@@ -11,4 +11,6 @@ npm install zod
 npm install ws
 npm i -g wscat
 wscat -c ws://localhost:8000/ws        ----- checking server is working with ws
+npm install @arcjet/node
+npm install @arcjet/node @arcjet/inspect
 ```

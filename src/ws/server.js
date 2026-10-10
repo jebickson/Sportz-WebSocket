@@ -1,4 +1,6 @@
 import {WebSocket, WebSocketServer} from 'ws';
+import {wsArcjet} from "../arcjet.js";
+import req from "express/lib/request.js";
 
 function sendJson(socket, payload){
     if(socket.readyState !== WebSocket.OPEN) return;
@@ -6,7 +8,7 @@ function sendJson(socket, payload){
     socket.send(JSON.stringify(payload));
 } //helper functions
 
-function broadcast(socket, payload) {
+function broadcast(wss, payload) {
     for (const client of wss.client) {
         if (client.readyState !== WebSocket.OPEN) continue;
 
@@ -17,7 +19,23 @@ function broadcast(socket, payload) {
 export function attachWebSocketServer(server) {
   const wss = new WebSocketServer({ server, path: '/ws', maxPayload: 1024 * 1024 });
 
-  wss.on('connection', (socket) => {
+  wss.on('connection',async  (socket) => {
+      if(wsArcjet){
+          try{
+              const decision = await  wsArcjet.protect(req);
+              if(decision.isDenied()){
+                  const code = decision.reason.isRateLimit() ? 1013 : 1008;
+                  const reason = decision.reason.isRateLimit() ? 'Rate limit exceeded' : 'Access Denied';
+
+                  socket.close(1011, 'Server security error');
+                  return;
+              }
+          }catch(e){
+              console.error('ws connection error', e);
+              socket.close(code, reason);
+              return;
+          }
+      }
     socket.isAlive = true;
     socket.on('pong', () => { socket.isAlive = true; });
 
