@@ -14,4 +14,5 @@ wscat -c ws://localhost:8000/ws        ----- checking server is working with ws
 npm install @arcjet/node
 npm install @arcjet/node @arcjet/inspect
 npm i apminsight --save
+npm run seed
 ```
