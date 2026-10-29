@@ -62,8 +62,6 @@ Sportz is a comprehensive backend service designed for live sports coverage, uti
 ### Dev Tools
 - **[CodeRabbit](https://jsm.dev/sportz-coderabbit)** is an AI-powered code review platform that provides automated, contextual feedback on pull requests. It helps developers improve code quality and catch potential bugs early by integrating directly into the development workflow.
 
-- **[Hostinger](https://jsm.dev/sportz-hostinger)** is a high-performance web hosting provider that offers scalable solutions for deploying web applications; it provides a user-friendly interface, optimized server performance, and robust security features to ensure reliable uptime and accessibility for your projects.
-
 - **[Site24x7](https://jsm.dev/sportz-site24x7)** is a comprehensive monitoring solution that provides deep insights into application performance and infrastructure health. It allows for real-time tracking of uptime, end-user experience, and server metrics to ensure maximum availability.
 
 
