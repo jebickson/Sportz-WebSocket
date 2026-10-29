@@ -277,24 +277,4 @@ Optional auto-subscribe on connect:
 - For multi-instance scaling, use pub/sub (Redis/NATS/Kafka) so broadcasts
   reach all WS servers.
 
-## <a name="links">🔗 Assets</a>
-
-Assets and snippets used in the project can be found in the **[video kit](https://jsmastery.com/video-kit/7970240e-e26d-42e0-ba87-a50eb4f0748d)**.
-
-<a href="https://jsmastery.com/video-kit/7970240e-e26d-42e0-ba87-a50eb4f0748d" target="_blank">
-  <img src="public/readme/readme-videokit.webp" alt="Video Kit Banner">
-</a>
-
-## <a name="more">🚀 More</a>
-
-**Advance your skills with JSM Pro Courses**
-
-Enjoyed creating this project? Dive deeper into our PRO courses for a richer learning adventure. They're packed with
-detailed explanations, cool features, and exercises to boost your skills. Give it a go!
-
-<a href="https://jsm.dev/sportz-jsm" target="_blank">
-  <img src="public/readme/readme-jsmpro.webp" alt="Project Banner">
-</a>
-
-
 
