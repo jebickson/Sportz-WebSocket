@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/-Zod-3E67B1?style=for-the-badge&logo=Zod&logoColor=white" />
 <br/>
 <img src="https://img.shields.io/badge/-Arcjet-5C2D91?style=for-the-badge&logo=Arcjet&logoColor=white" /> 
-<img src="https://img.shields.io/badge/-Site24x7-26CD66?style=for-the-badge&logo=Site24x7&logoColor=white" /> <img src="https://img.shields.io/badge/-CodeRabbit-000000?style=for-the-badge&logo=CodeRabbit&logoColor=white" /> 
+
 
   </div>
 
