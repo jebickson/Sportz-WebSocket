@@ -1,0 +1,437 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sportz — Live Sports</title>
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #0a0d14;
+  --panel: #111722;
+  --panel2: #161e2b;
+  --border: #253044;
+  --muted: #8c9ab0;
+  --text: #edf3fc;
+  --green: #53e0a0;
+  --blue: #7ca7ff;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+button { font: inherit; cursor: pointer; }
+.app { min-height: 100vh; }
+header {
+  height: 76px;
+  padding: 0 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background: #0d121b;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+.brand { display: flex; align-items: center; gap: 12px; font-size: 22px; font-weight: 800; letter-spacing: -.8px; }
+.logo {
+  width: 39px; height: 39px; display: grid; place-items: center;
+  border-radius: 12px; background: var(--green); color: #07140f;
+  font-size: 20px;
+}
+.brand span { color: var(--green); }
+.header-right { display: flex; align-items: center; gap: 20px; }
+.status { display: flex; align-items: center; gap: 9px; color: var(--muted); font-size: 12px; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: #758197; }
+.dot.online { background: var(--green); box-shadow: 0 0 12px #53e0a066; }
+.avatar { width: 35px; height: 35px; border-radius: 50%; background: #26354a; display: grid; place-items: center; font-weight: 700; }
+main { max-width: 1450px; margin: auto; padding: 36px 5%; }
+.eyebrow { color: var(--green); text-transform: uppercase; font-size: 11px; font-weight: 800; letter-spacing: 2px; }
+.hero { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 30px; }
+h1 { margin: 10px 0; font-size: clamp(30px, 4vw, 45px); letter-spacing: -1.7px; }
+.subtitle { color: var(--muted); font-size: 14px; line-height: 1.7; }
+.hero-pill { background: #172b26; color: var(--green); padding: 11px 15px; border: 1px solid #24473a; border-radius: 12px; font-size: 12px; white-space: nowrap; }
+.metrics { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; margin-bottom: 30px; }
+.metric { background: var(--panel); border: 1px solid var(--border); border-radius: 17px; padding: 20px; }
+.metric-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12px; }
+.metric-icon { font-size: 19px; }
+.metric-number { font-size: 30px; font-weight: 800; margin-top: 12px; letter-spacing: -1px; }
+.metric-note { color: var(--muted); font-size: 11px; margin-top: 5px; }
+.content { display: grid; grid-template-columns: minmax(0,1.7fr) minmax(290px,.8fr); gap: 20px; align-items: start; }
+.section-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 17px; }
+h2 { font-size: 17px; margin: 0; letter-spacing: -.3px; }
+.section-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+.filters { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 17px; }
+.filter { border: 1px solid var(--border); color: var(--muted); background: var(--panel); padding: 9px 13px; border-radius: 10px; font-size: 12px; }
+.filter.active { background: #1d352e; border-color: #315d4a; color: var(--green); }
+.matches { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+.match-card { background: var(--panel); border: 1px solid var(--border); border-radius: 17px; padding: 17px; min-width: 0; transition: border-color .2s, transform .2s; }
+.match-card:hover { border-color: #50617b; transform: translateY(-2px); }
+.match-card.selected { border-color: #4caa83; box-shadow: inset 0 0 0 1px #4caa8330; }
+.match-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 22px; }
+.sport { color: var(--muted); font-size: 11px; text-transform: capitalize; }
+.live-label { color: var(--green); background: #1a3029; border-radius: 6px; padding: 5px 7px; font-size: 9px; font-weight: 800; letter-spacing: .7px; }
+.teams { display: grid; gap: 15px; }
+.team-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.team-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.team-mark { width: 35px; height: 35px; flex: 0 0 35px; display: grid; place-items: center; border-radius: 11px; background: #202b3d; font-size: 16px; }
+.team-name { font-size: 12px; font-weight: 650; overflow-wrap: anywhere; }
+.score { font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums; }
+.match-bottom { display: flex; justify-content: space-between; gap: 8px; align-items: center; border-top: 1px solid var(--border); margin-top: 18px; padding-top: 13px; color: var(--muted); font-size: 10px; }
+.follow { border: 0; background: transparent; color: var(--blue); font-size: 11px; padding: 0; }
+.side-panel { background: var(--panel); border: 1px solid var(--border); border-radius: 17px; overflow: hidden; }
+.side-head { padding: 19px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.pulse { color: var(--green); font-size: 10px; }
+.feed { padding: 6px 18px; max-height: 510px; overflow-y: auto; }
+.feed-item { display: flex; gap: 12px; padding: 15px 0; border-bottom: 1px solid #202a39; }
+.feed-item:last-child { border-bottom: 0; }
+.feed-icon { width: 33px; height: 33px; flex: 0 0 33px; display: grid; place-items: center; border-radius: 10px; background: #202a3a; }
+.feed-copy { min-width: 0; }
+.feed-title { font-size: 12px; line-height: 1.6; overflow-wrap: anywhere; }
+.feed-meta { color: var(--muted); font-size: 10px; margin-top: 6px; }
+.empty { color: var(--muted); text-align: center; padding: 36px 10px; font-size: 12px; line-height: 1.7; }
+.footer { color: #65748a; font-size: 11px; padding: 28px 0 10px; text-align: center; }
+.toast { position: fixed; bottom: 22px; left: 50%; transform: translateX(-50%); background: #1b3029; border: 1px solid #315d4a; color: var(--green); padding: 12px 17px; border-radius: 12px; font-size: 12px; display: none; z-index: 10; }
+@media(max-width:900px) {
+  .content { grid-template-columns: 1fr; }
+  .feed { max-height: 350px; }
+}
+@media(max-width:580px) {
+  header { padding: 0 18px; height: 66px; }
+  main { padding: 27px 16px; }
+  .hero { align-items: start; flex-direction: column; }
+  .metrics { gap: 8px; }
+  .metric { padding: 13px; }
+  .metric-number { font-size: 24px; }
+  .metric-note { line-height: 1.5; }
+  .matches { grid-template-columns: 1fr; }
+  .header-right { gap: 10px; }
+  .status { font-size: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand"><div class="logo">S</div> SPORTZ<span>.</span></div>
+    <div class="header-right">
+      <div class="status"><span id="connectionDot" class="dot"></span><span id="connectionText">Connecting...</span></div>
+      <div class="avatar">S</div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Your sports command center</div>
+        <h1>Every match. <span style="color:var(--green)">Every moment.</span></h1>
+        <div class="subtitle">Follow your matches and watch updates stream in real time.</div>
+      </div>
+      <div class="hero-pill">✦ WebSocket demo feed</div>
+    </section>
+
+    <section class="metrics">
+      <div class="metric">
+        <div class="metric-top">Available matches <span class="metric-icon">▤</span></div>
+        <div class="metric-number" id="matchCount">—</div>
+        <div class="metric-note">Loaded from your JSON data</div>
+      </div>
+      <div class="metric">
+        <div class="metric-top">Following <span class="metric-icon">◎</span></div>
+        <div class="metric-number" id="followingCount">0</div>
+        <div class="metric-note">Match subscriptions</div>
+      </div>
+      <div class="metric">
+        <div class="metric-top">Commentary events <span class="metric-icon">↗</span></div>
+        <div class="metric-number" id="eventCount">0</div>
+        <div class="metric-note">Received during this session</div>
+      </div>
+    </section>
+
+    <section class="content">
+      <div>
+        <div class="section-head">
+          <div><h2>Match center</h2><div class="section-sub">Select a match to follow its commentary</div></div>
+        </div>
+        <div class="filters">
+          <button class="filter active" data-filter="all">All sports</button>
+          <button class="filter" data-filter="football">⚽ Football</button>
+          <button class="filter" data-filter="cricket">🏏 Cricket</button>
+          <button class="filter" data-filter="basketball">🏀 Basketball</button>
+        </div>
+        <div class="matches" id="matches">
+          <div class="empty">Connecting to your WebSocket and loading matches…</div>
+        </div>
+      </div>
+
+      <aside class="side-panel">
+        <div class="side-head">
+          <div><h2>Live commentary</h2><div class="section-sub">Updates from followed matches</div></div>
+          <span class="pulse">● STREAM</span>
+        </div>
+        <div class="feed" id="feed">
+          <div class="empty">Follow a match to see its commentary here.</div>
+        </div>
+      </aside>
+    </section>
+    <div class="footer">SPORTZ. · Local WebSocket dashboard · Simulated commentary for development</div>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const socketUrl = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws`;
+let socket;
+let matches = [];
+let currentFilter = 'all';
+const followed = new Set();
+let eventCount = 0;
+const maxFeedItems = 70;
+
+const $ = id => document.getElementById(id);
+const icons = {
+  football: '⚽',
+  cricket: '🏏',
+  basketball: '🏀',
+  tennis: '🎾',
+  default: '🏆'
+};
+
+function showToast(text) {
+  const toast = $('toast');
+  toast.textContent = text;
+  toast.style.display = 'block';
+  setTimeout(() => { toast.style.display = 'none'; }, 2200);
+}
+
+function setConnection(online) {
+  $('connectionDot').classList.toggle('online', online);
+  $('connectionText').textContent = online ? 'Connected' : 'Disconnected';
+}
+
+function send(payload) {
+  if (socket && socket.readyState === WebSocket.OPEN) {
+    socket.send(JSON.stringify(payload));
+  } else {
+    showToast('WebSocket is not connected yet');
+  }
+}
+
+function connect() {
+  socket = new WebSocket(socketUrl);
+
+  socket.addEventListener('open', () => {
+    setConnection(true);
+    send({ type: 'get_matches' });
+  });
+
+  socket.addEventListener('message', event => {
+    let message;
+    try {
+      message = JSON.parse(event.data);
+    } catch {
+      return;
+    }
+
+    if (message.type === 'matches') {
+      matches = Array.isArray(message.data) ? message.data : [];
+      $('matchCount').textContent = matches.length;
+      renderMatches();
+
+      // Subscribe to all available matches so their commentary can appear.
+      matches.forEach(match => {
+        if (!followed.has(match.id)) {
+          followed.add(match.id);
+          send({ type: 'subscribe', matchId: match.id });
+        }
+      });
+      updateFollowingCount();
+      return;
+    }
+
+    if (message.type === 'subscribed') {
+      updateFollowingCount();
+      return;
+    }
+
+    if (message.type === 'match_data') {
+      updateMatch(message.data);
+      return;
+    }
+
+    if (message.type === 'score_update') {
+      updateMatch(message.data);
+      addFeedItem({
+        matchId: message.data.id,
+        text: `Score update: ${message.data.homeTeam} ${message.data.homeScore} – ${message.data.awayScore} ${message.data.awayTeam}`,
+        kind: 'score',
+        timestamp: new Date().toISOString()
+      });
+      return;
+    }
+
+    if (message.type === 'commentary') {
+      eventCount++;
+      $('eventCount').textContent = eventCount;
+      addFeedItem({ ...message.data, kind: 'commentary' });
+      return;
+    }
+
+    if (message.type === 'update_saved') {
+      showToast('Score saved successfully');
+      return;
+    }
+
+    if (message.type === 'error') {
+      showToast(message.message || 'WebSocket error');
+    }
+  });
+
+  socket.addEventListener('close', () => {
+    setConnection(false);
+    setTimeout(connect, 2500);
+  });
+
+  socket.addEventListener('error', () => {
+    setConnection(false);
+  });
+}
+
+function updateFollowingCount() {
+  $('followingCount').textContent = followed.size;
+}
+
+function updateMatch(updated) {
+  const index = matches.findIndex(match => match.id === updated.id);
+  if (index >= 0) matches[index] = { ...matches[index], ...updated };
+  renderMatches();
+}
+
+function renderMatches() {
+  const container = $('matches');
+  const filtered = matches.filter(match =>
+    currentFilter === 'all' ||
+    String(match.sport || '').toLowerCase() === currentFilter
+  );
+
+  if (!filtered.length) {
+    container.innerHTML = '<div class="empty">No matches found for this sport.</div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map(match => {
+    const sport = String(match.sport || 'sport').toLowerCase();
+    const icon = icons[sport] || icons.default;
+    const isFollowing = followed.has(match.id);
+
+    return `
+      <article class="match-card ${isFollowing ? 'selected' : ''}">
+        <div class="match-top">
+          <span class="sport">${icon} ${escapeHtml(match.sport || 'Sport')} · Match ${match.id}</span>
+          <span class="live-label">${isFollowing ? '● FOLLOWING' : 'MATCH'}</span>
+        </div>
+        <div class="teams">
+          <div class="team-row">
+            <div class="team-left">
+              <div class="team-mark">${icon}</div>
+              <div class="team-name">${escapeHtml(match.homeTeam || 'Home team')}</div>
+            </div>
+            <div class="score">${Number(match.homeScore ?? 0)}</div>
+          </div>
+          <div class="team-row">
+            <div class="team-left">
+              <div class="team-mark">${icon}</div>
+              <div class="team-name">${escapeHtml(match.awayTeam || 'Away team')}</div>
+            </div>
+            <div class="score">${Number(match.awayScore ?? 0)}</div>
+          </div>
+        </div>
+        <div class="match-bottom">
+          <span>${isFollowing ? 'Receiving match events' : 'Not followed'}</span>
+          <button class="follow" data-match-id="${Number(match.id)}">
+            ${isFollowing ? 'Unfollow −' : 'Follow +'}
+          </button>
+        </div>
+      </article>`;
+  }).join('');
+
+  container.querySelectorAll('[data-match-id]').forEach(button => {
+    button.addEventListener('click', () => toggleFollow(Number(button.dataset.matchId)));
+  });
+}
+
+function toggleFollow(matchId) {
+  if (followed.has(matchId)) {
+    followed.delete(matchId);
+    send({ type: 'unsubscribe', matchId });
+    showToast(`Unfollowed match ${matchId}`);
+  } else {
+    followed.add(matchId);
+    send({ type: 'subscribe', matchId });
+    showToast(`Following match ${matchId}`);
+  }
+  updateFollowingCount();
+  renderMatches();
+}
+
+function addFeedItem(item) {
+  const feed = $('feed');
+  const empty = feed.querySelector('.empty');
+  if (empty) empty.remove();
+
+  const row = document.createElement('div');
+  row.className = 'feed-item';
+
+  const icon = document.createElement('div');
+  icon.className = 'feed-icon';
+  icon.textContent = item.kind === 'score' ? '⚡' : '📣';
+
+  const copy = document.createElement('div');
+  copy.className = 'feed-copy';
+
+  const title = document.createElement('div');
+  title.className = 'feed-title';
+  title.textContent = `[Match ${item.matchId}] ${item.text || 'Match update'}`;
+
+  const meta = document.createElement('div');
+  meta.className = 'feed-meta';
+  meta.textContent = `${item.kind === 'score' ? 'SCORE UPDATE' : 'COMMENTARY'} · ${new Date(item.timestamp || Date.now()).toLocaleTimeString()}`;
+
+  copy.append(title, meta);
+  row.append(icon, copy);
+  feed.prepend(row);
+
+  while (feed.children.length > maxFeedItems) {
+    feed.lastElementChild.remove();
+  }
+}
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, char => ({
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#39;'
+  })[char]);
+}
+
+document.querySelectorAll('[data-filter]').forEach(button => {
+  button.addEventListener('click', () => {
+    currentFilter = button.dataset.filter;
+    document.querySelectorAll('[data-filter]').forEach(item =>
+      item.classList.toggle('active', item === button)
+    );
+    renderMatches();
+  });
+});
+
+connect();
+</script>
+</body>
+</html>
