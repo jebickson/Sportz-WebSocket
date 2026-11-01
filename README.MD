@@ -6,6 +6,8 @@ The project's focus is production-minded WebSocket engineering: per-match subscr
 
 **Live demo:** https://sportz-websocket-9l26.onrender.com/
 *(Hosted on a free tier, so the first request after a period of inactivity can take a moment while the server wakes up.)*
+</br>
+**Documentation:** https://jebickson.gitbook.io/sportz-websocket
 
 ![Node.js](https://img.shields.io/badge/Node.js-339933?logo=nodedotjs&logoColor=white)
 ![Express](https://img.shields.io/badge/Express-000000?logo=express&logoColor=white)
